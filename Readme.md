@@ -140,6 +140,30 @@ To package Ace, we use the dryice build tool developed by the Mozilla Skywriter 
 
 To generate all the files in the ace-builds repository, run `node Makefile.dryice.js full --target ../ace-builds`
 
+ES module version
+-----------
+
+ace.mjs is ace ES module verison. You can import directly.
+
+```
+import ace from "https://taisukef.github.io/ace/ace.mjs";
+
+const editor = ace.edit("editor");
+```
+
+Building ace.mjs
+```bash
+node ./Makefile.dryice.js -m
+cp build/src-min/ace.js build/src-min/ace-es.js
+echo 'export default ace;' >> build/src-min/ace-es.js
+deno bundle build/src-min/ace-es.js > ace.mjs
+```
+
+Open http://localhost:8888/ace_mjs_test.html after starting the bundled mini HTTP server.
+```
+node ./static.js
+```
+
 Running the Unit Tests
 ----------------------
 
